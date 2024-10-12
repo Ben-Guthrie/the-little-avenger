@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqx28vp8kokba"]
+
+[ext_resource type="Texture2D" uid="uid://c3da5m2rc2hkt" path="res://assets/16x16-RPG-characters/16x16-RPG-characters/sprites/new-style/chibi-layered.png" id="1_sm856"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irw57"]
+atlas = ExtResource("1_sm856")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3w2wr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irw57")
+}],
+"loop": true,
+"name": &"idle_forward",
+"speed": 5.0
+}]
+
+[node name="Timmy" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_3w2wr")
+animation = &"idle_forward"
