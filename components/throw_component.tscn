@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://265bu6cxmm3h"]
+
+[ext_resource type="Script" path="res://components/throw_component.gd" id="1_e5i6o"]
+
+[node name="ThrowComponent" type="Node2D"]
+script = ExtResource("1_e5i6o")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collide_with_areas = true

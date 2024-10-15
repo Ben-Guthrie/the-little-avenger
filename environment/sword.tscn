@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhodgdmevucsl"]
+
+[ext_resource type="Texture2D" uid="uid://b14j4sh7d8oyx" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0104.png" id="1_77vco"]
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="2_sjmjh"]
+[ext_resource type="PackedScene" uid="uid://265bu6cxmm3h" path="res://components/throw_component.tscn" id="3_tdl3r"]
+
+[sub_resource type="GDScript" id="GDScript_s6uk3"]
+script/source = "extends Trigger
+
+var kill_triggers = []
+
+@export var distance = 3
+
+func trigger_effect(target):
+	
+	var target_start = target.global_position
+	var start = global_position
+	var direction = (global_position - target.global_position).normalized()
+	if target.has_method(\"play_idle\"):
+		target.play_idle(direction)
+		
+	get_parent().global_rotation = Vector2.UP.angle_to(direction)
+	get_parent().get_node(\"AnimationPlayer\").play(\"use\")
+	await get_parent().get_node(\"AnimationPlayer\").animation_finished
+	var old_parent = get_parent().get_parent()
+	get_parent().reparent(target)
+	var throw_component = get_parent().get_node(\"ThrowComponent\")
+	make_triggers(target, distance, direction)
+	
+	throw_component.self_node = target
+	throw_component.throw(direction, distance)
+	
+	await throw_component.hit
+	target.get_node(\"MoveComponent\").moved.emit(target.global_position, target_start)
+	SignalBus.moved.emit(target.global_position, target_start)
+	
+	var distance_traveled = floor(global_position.distance_to(start) / Constants.TILE_SIZE)
+	for i in range(distance_traveled):
+		await Game.main_scene.current_scene.check_triggers(kill_triggers[i])
+	
+	get_parent().reparent(old_parent)
+	complete.emit.call_deferred()
+	
+
+func make_triggers(target, distance, direction):
+	for i in range(distance+1):
+		var new_trigger = preload(\"res://triggers/kill_trigger.tscn\").instantiate()
+		new_trigger.exclude.append(target)
+		add_child(new_trigger)
+		new_trigger.global_position = global_position + Constants.TILE_SIZE * (direction)
+		SignalBus.new_turn.connect(new_trigger.queue_free, CONNECT_ONE_SHOT)
+		print(global_position, direction)
+		print(\"added trigger at \", new_trigger.global_position)
+		kill_triggers.append(new_trigger)
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yecc"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_6qdo1"]
+resource_name = "use"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 4), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yingt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h77po"]
+_data = {
+"RESET": SubResource("Animation_yingt"),
+"use": SubResource("Animation_6qdo1")
+}
+
+[node name="Sword" type="Sprite2D"]
+texture = ExtResource("1_77vco")
+
+[node name="Trigger" parent="." instance=ExtResource("2_sjmjh")]
+script = SubResource("GDScript_s6uk3")
+distance = 3
+
+[node name="CollisionShape2D" parent="Trigger" index="0"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="ThrowComponent" parent="." node_paths=PackedStringArray("self_node") instance=ExtResource("3_tdl3r")]
+self_node = NodePath("..")
+speed_multiplier = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h77po")
+}
+speed_scale = 4.0
+
+[editable path="Trigger"]

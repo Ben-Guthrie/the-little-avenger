@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dikgr2ldyjqsw"]
+
+[ext_resource type="Script" path="res://haunt/haunt_ui.gd" id="1_mft65"]
+[ext_resource type="PackedScene" uid="uid://bea0smgsio5gf" path="res://haunt/move.tscn" id="1_ql4f2"]
+
+[node name="HauntUI" type="VBoxContainer"]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 0
+alignment = 2
+script = ExtResource("1_mft65")
+
+[node name="Options" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Move" parent="Options" instance=ExtResource("1_ql4f2")]
+layout_mode = 2

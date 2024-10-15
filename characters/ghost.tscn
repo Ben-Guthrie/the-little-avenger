@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://cycr7ijppuaug"]
+
+[ext_resource type="Texture2D" uid="uid://dkhf6dmj162yq" path="res://assets/made/ghost.png" id="1_bftnd"]
+[ext_resource type="Script" path="res://characters/ghost.gd" id="2_a2i25"]
+[ext_resource type="PackedScene" uid="uid://y352sddbvrud" path="res://components/move_component.tscn" id="3_vwo7k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umers"]
+atlas = ExtResource("1_bftnd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdw0w"]
+atlas = ExtResource("1_bftnd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhlbv"]
+atlas = ExtResource("1_bftnd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6au4o"]
+atlas = ExtResource("1_bftnd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8l3n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umers")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdw0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhlbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6au4o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Ghost" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_v8l3n")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -4)
+script = ExtResource("2_a2i25")
+
+[node name="MoveComponent" parent="." node_paths=PackedStringArray("self_node") instance=ExtResource("3_vwo7k")]
+self_node = NodePath("..")
+can_trigger = false

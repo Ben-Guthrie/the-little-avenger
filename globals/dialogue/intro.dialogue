@@ -1,0 +1,31 @@
+~ intro
+Little Timmy: I don't care that it's time for school! I'm going on an adventure!
+Little Timmy: I'm going to avenge Gramps's death and become a great adventurer like him!
+Ghost of Gramps: Wonderful.
+=> END
+
+~ sign
+Little Timmy: This sign looks important...
+Little Timmy: If only I could read.
+Gramps: You can't read?! Maybe you shouldn't be skipping school!
+=> END
+
+~ river
+if !("river" in viewed_dialogue):
+	do before_animation()
+	Little Timmy: Who moved the bridge??
+do after_animation()
+if !("river" in viewed_dialogue):
+	Little Timmy: If only there was a siiign
+	set viewed_dialogue.append("river")
+=> END
+
+~ tutorial
+Gramps: He's not going to get anywhere on his own.
+do main_scene.highlight_buttons()
+Gramps has the power to rewind and pause time.
+do main_scene.stop_highlight()
+do main_scene.highlight_energy()
+Gramps can haunt objects to help Timmy on his "adventure". He can haunt objects until he runs out of energy.
+do main_scene.stop_highlight()
+=> END

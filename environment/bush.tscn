@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvowmnfl8p3x7"]
+
+[ext_resource type="Texture2D" uid="uid://cmrbhilcf4s4l" path="res://assets/kenney_tiny-town/Tiles/tile_0005.png" id="1_237qb"]
+[ext_resource type="Material" uid="uid://dtcoib8coihye" path="res://shaders/outline_material.tres" id="1_v4mxr"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="2_n6dei"]
+[ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="4_f6342"]
+
+[node name="Bush" type="Sprite2D"]
+material = ExtResource("1_v4mxr")
+texture = ExtResource("1_237qb")
+region_rect = Rect2(-2, -2, 20, 20)
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_n6dei")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+haunt_target = NodePath("../../../..")
+
+[node name="CollisionComponent" parent="." instance=ExtResource("4_f6342")]
+
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]

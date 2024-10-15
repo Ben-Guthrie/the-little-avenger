@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cphxxij4w7kuv"]
+
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="1_03q56"]
+[ext_resource type="Script" path="res://triggers/dialogue_trigger.gd" id="2_7jb6k"]
+
+[node name="DialogueTrigger" instance=ExtResource("1_03q56")]
+script = ExtResource("2_7jb6k")
+dialogue_resource = null
+title = ""

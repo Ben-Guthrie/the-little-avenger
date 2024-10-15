@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=3 uid="uid://b0v20701d0m0c"]
+
+[ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_wd7pb"]
+[ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_rdbnb"]
+[ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_osgfw"]
+[ext_resource type="Texture2D" uid="uid://c5g2vc0uvywn4" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0091.png" id="4_alhgu"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="5_ql2lt"]
+[ext_resource type="PackedScene" uid="uid://tbalimw0m14i" path="res://haunt/change.tscn" id="6_yvjvg"]
+[ext_resource type="PackedScene" uid="uid://dm6yekf5namuj" path="res://environment/trap_chest.tscn" id="8_mv3x3"]
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="8_u660f"]
+[ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="10_rdmgj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbgw3"]
+shader = ExtResource("1_wd7pb")
+shader_parameter/size_effect = 12.0
+shader_parameter/speed = 1.2
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.2
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/onoff = false
+shader_parameter/vertical_gradient = ExtResource("3_osgfw")
+shader_parameter/color_gradient = ExtResource("2_rdbnb")
+
+[sub_resource type="GDScript" id="GDScript_wx50o"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$HauntableComponent/HauntUI/Options/Close.new_scene = preload(\"res://environment/chest.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_xq5j8"]
+script/source = "extends Trigger
+
+
+func trigger_effect(target):
+	print(\"chest triggered\")
+	if \"path\" in target:
+		if target.has_meta(\"is_timmy\"):
+			print(\"is timmy\")
+			SignalBus.trigger_dialogue.emit(\"chest\")
+			await SignalBus.dialogue_triggered
+		var marker = Marker2D.new()
+		marker.global_position = get_parent().get_parent().global_position
+		target.path.add_child(marker)
+		target.path.move_child(marker, 0)
+		complete.emit.call_deferred()
+		print(\"complete\")
+	else:
+		complete.emit()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yecc"]
+size = Vector2(16, 16)
+
+[node name="OpenChest" type="Sprite2D"]
+material = SubResource("ShaderMaterial_dbgw3")
+texture = ExtResource("4_alhgu")
+script = SubResource("GDScript_wx50o")
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_ql2lt")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+move_range = 2
+haunt_target = NodePath("../../../..")
+
+[node name="Close" parent="HauntableComponent/HauntUI/Options" index="1" node_paths=PackedStringArray("haunt_target") instance=ExtResource("6_yvjvg")]
+layout_mode = 2
+haunt_target = NodePath("../../../..")
+
+[node name="Button" parent="HauntableComponent/HauntUI/Options/Close" index="0"]
+text = "Close"
+
+[node name="Trap" parent="HauntableComponent/HauntUI/Options" index="2" node_paths=PackedStringArray("haunt_target") instance=ExtResource("6_yvjvg")]
+layout_mode = 2
+new_scene = ExtResource("8_mv3x3")
+haunt_target = NodePath("../../../..")
+
+[node name="Button" parent="HauntableComponent/HauntUI/Options/Trap" index="0"]
+text = "Trap"
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Trigger" parent="Triggers" instance=ExtResource("8_u660f")]
+position = Vector2(0, 16)
+script = SubResource("GDScript_xq5j8")
+one_off = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(16, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(32, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(48, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(0, -48)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(-16, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(-32, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(-48, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionComponent" parent="." instance=ExtResource("10_rdmgj")]
+
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]
+[editable path="HauntableComponent/HauntUI/Options/Close"]
+[editable path="HauntableComponent/HauntUI/Options/Trap"]
+[editable path="Triggers/Trigger"]

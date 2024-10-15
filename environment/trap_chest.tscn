@@ -1,0 +1,203 @@
+[gd_scene load_steps=18 format=3 uid="uid://dm6yekf5namuj"]
+
+[ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_bf2qt"]
+[ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_yaath"]
+[ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_cp3ry"]
+[ext_resource type="Texture2D" uid="uid://xpamsbpuu5n1" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0092.png" id="4_gx81v"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="5_cc6ki"]
+[ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="6_xwe1t"]
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="7_hvv6a"]
+[ext_resource type="Texture2D" uid="uid://d0ynwcxxlvqbe" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0090.png" id="8_2lam0"]
+[ext_resource type="Texture2D" uid="uid://f1w2ewf0caib" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="9_kljch"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbgw3"]
+shader = ExtResource("1_bf2qt")
+shader_parameter/size_effect = 12.0
+shader_parameter/speed = 1.2
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.2
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/onoff = false
+shader_parameter/vertical_gradient = ExtResource("3_cp3ry")
+shader_parameter/color_gradient = ExtResource("2_yaath")
+
+[sub_resource type="GDScript" id="GDScript_wodog"]
+script/source = "extends Trigger
+
+
+func trigger_effect(target):
+	if target.has_method(\"kill\"):
+		$AnimationPlayer.play(\"eat\")
+		await $AnimationPlayer.animation_finished
+		target.kill()
+	complete.emit.call_deferred()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yecc"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_74pku"]
+resource_name = "eat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_gx81v"), ExtResource("8_2lam0"), ExtResource("9_kljch"), ExtResource("4_gx81v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qgupy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_gx81v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cx5j"]
+_data = {
+"RESET": SubResource("Animation_qgupy"),
+"eat": SubResource("Animation_74pku")
+}
+
+[sub_resource type="GDScript" id="GDScript_xekev"]
+script/source = "extends Trigger
+
+
+func trigger_effect(target):
+	print(\"chest triggered\")
+	if \"path\" in target:
+		if target.has_meta(\"is_timmy\"):
+			print(\"is timmy\")
+			SignalBus.trigger_dialogue.emit(\"chest\")
+			await SignalBus.dialogue_triggered
+		var marker = Marker2D.new()
+		marker.global_position = get_parent().global_position
+		target.path.add_child(marker)
+		target.path.move_child(marker, 0)
+		complete.emit.call_deferred()
+		print(\"complete\")
+	else:
+		complete.emit()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mflwt"]
+size = Vector2(16, 16)
+
+[node name="TrapChest" type="Sprite2D"]
+material = SubResource("ShaderMaterial_dbgw3")
+texture = ExtResource("4_gx81v")
+
+[node name="CollisionComponent" parent="." instance=ExtResource("6_xwe1t")]
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_cc6ki")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+move_range = 2
+haunt_target = NodePath("../../../..")
+
+[node name="TriggerEat" parent="." instance=ExtResource("7_hvv6a")]
+script = SubResource("GDScript_wodog")
+one_off = false
+
+[node name="CollisionShape2D" parent="TriggerEat" index="0"]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TriggerEat"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TriggerEat"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TriggerEat"]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TriggerEat"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_6cx5j")
+}
+speed_scale = 4.0
+
+[node name="TriggerAttract" parent="." instance=ExtResource("7_hvv6a")]
+script = SubResource("GDScript_xekev")
+one_off = false
+
+[node name="CollisionShape2D" parent="TriggerAttract" index="0"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(0, 48)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(48, 0)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(0, -48)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="TriggerAttract"]
+position = Vector2(-48, 0)
+shape = SubResource("RectangleShape2D_mflwt")
+
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]
+[editable path="TriggerEat"]
+[editable path="TriggerAttract"]

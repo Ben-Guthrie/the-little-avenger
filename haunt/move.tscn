@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bea0smgsio5gf"]
+
+[ext_resource type="PackedScene" uid="uid://cvwo2itlsd4pw" path="res://haunt/haunt_selection.tscn" id="1_gp40w"]
+[ext_resource type="Script" path="res://haunt/move.gd" id="2_tu4mp"]
+
+[node name="Move" instance=ExtResource("1_gp40w")]
+script = ExtResource("2_tu4mp")
+move_range = 1
+
+[node name="Button" parent="." index="0"]
+text = "Move"

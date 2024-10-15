@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1x4sw3evlrcm"]
+
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="1_obpdx"]
+
+[sub_resource type="GDScript" id="GDScript_674pu"]
+script/source = "extends Trigger
+
+
+func trigger_effect(target):
+	if target.has_method(\"kill\"):
+		target.kill()
+	complete.emit.call_deferred()
+"
+
+[node name="KillTrigger" instance=ExtResource("1_obpdx")]
+script = SubResource("GDScript_674pu")

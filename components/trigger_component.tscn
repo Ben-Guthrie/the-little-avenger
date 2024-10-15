@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqnds800uko31"]
+
+[ext_resource type="Script" path="res://components/trigger_component.gd" id="1_fh1se"]
+
+[node name="TriggerComponent" type="Node2D"]
+script = ExtResource("1_fh1se")
+
+[node name="TriggerRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false

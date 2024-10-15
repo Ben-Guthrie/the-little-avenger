@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://tbalimw0m14i"]
+
+[ext_resource type="PackedScene" uid="uid://cvwo2itlsd4pw" path="res://haunt/haunt_selection.tscn" id="1_ljuul"]
+
+[sub_resource type="GDScript" id="GDScript_ogriu"]
+script/source = "extends HauntOption
+
+@export var new_scene: PackedScene
+
+func haunt():
+	var new_object = new_scene.instantiate()
+	new_object.global_position = haunt_target.global_position
+	haunt_target.get_parent().add_child(new_object)
+	haunted.emit(energy_cost)
+	haunt_target.queue_free()
+"
+
+[node name="Change" instance=ExtResource("1_ljuul")]
+script = SubResource("GDScript_ogriu")
+new_scene = null
+
+[node name="Button" parent="." index="0"]
+text = "Open"

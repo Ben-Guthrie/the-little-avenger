@@ -1,0 +1,129 @@
+[gd_scene load_steps=15 format=3 uid="uid://dolou4guv44a3"]
+
+[ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_lc4ox"]
+[ext_resource type="Texture2D" uid="uid://de74asy4o8veq" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0112.png" id="1_r7i2u"]
+[ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_4kmdo"]
+[ext_resource type="PackedScene" uid="uid://y352sddbvrud" path="res://components/move_component.tscn" id="2_aqa8f"]
+[ext_resource type="Script" path="res://characters/archer.gd" id="2_fe155"]
+[ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_0ufud"]
+[ext_resource type="PackedScene" uid="uid://c6cxf2hu7tv3m" path="res://environment/Bow.tscn" id="3_tcshp"]
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="4_jh160"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="6_4nqi7"]
+[ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="7_08d78"]
+[ext_resource type="PackedScene" uid="uid://cqnds800uko31" path="res://components/trigger_component.tscn" id="11_opb5p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ljg4c"]
+shader = ExtResource("1_lc4ox")
+shader_parameter/size_effect = 12.0
+shader_parameter/speed = 1.2
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.2
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/onoff = false
+shader_parameter/vertical_gradient = ExtResource("3_0ufud")
+shader_parameter/color_gradient = ExtResource("2_4kmdo")
+
+[sub_resource type="GDScript" id="GDScript_ie3ji"]
+script/source = "extends Node2D
+
+signal shoot
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for child in get_children():
+		child.shoot.connect(shoot.emit)
+"
+
+[sub_resource type="GDScript" id="GDScript_cpkq2"]
+script/source = "extends Trigger
+
+signal shoot
+
+func trigger_effect(target):
+	var raycast = RayCast2D.new()
+	add_child(raycast)
+	raycast.target_position = target.global_position - global_position
+	raycast.force_raycast_update()
+	if raycast.is_colliding() and raycast.get_collider() != target:
+		complete.emit()
+	else:
+		if target.has_method(\"stop_animation\"):
+			target.stop_animation()
+		shoot.emit()
+		get_parent().get_parent().hit.connect(complete.emit, CONNECT_ONE_SHOT)
+	raycast.queue_free()
+"
+
+[node name="Archer" type="Sprite2D"]
+material = SubResource("ShaderMaterial_ljg4c")
+texture = ExtResource("1_r7i2u")
+script = ExtResource("2_fe155")
+
+[node name="MoveComponent" parent="." node_paths=PackedStringArray("self_node") instance=ExtResource("2_aqa8f")]
+self_node = NodePath("..")
+
+[node name="Bow" parent="." instance=ExtResource("3_tcshp")]
+position = Vector2(0, 16)
+rotation = 1.5708
+
+[node name="Triggers" type="Node2D" parent="."]
+script = SubResource("GDScript_ie3ji")
+
+[node name="Trigger" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 32)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger2" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 48)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger3" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 64)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger4" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 80)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger5" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 96)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger6" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 112)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger7" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 128)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger8" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 144)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger9" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 160)
+script = SubResource("GDScript_cpkq2")
+
+[node name="Trigger10" parent="Triggers" instance=ExtResource("4_jh160")]
+position = Vector2(0, 176)
+script = SubResource("GDScript_cpkq2")
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_4nqi7")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+haunt_target = NodePath("../../../..")
+energy_cost = 2
+
+[node name="CollisionComponent" parent="." instance=ExtResource("7_08d78")]
+
+[node name="TriggerComponent" parent="." instance=ExtResource("11_opb5p")]
+
+[connection signal="shoot" from="Triggers" to="." method="_on_triggers_shoot"]
+
+[editable path="Bow"]
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]

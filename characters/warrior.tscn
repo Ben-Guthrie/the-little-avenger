@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=3 uid="uid://3bar45d4qj4m"]
+
+[ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_mv5p4"]
+[ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_xy2ug"]
+[ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_a4f3l"]
+[ext_resource type="PackedScene" uid="uid://y352sddbvrud" path="res://components/move_component.tscn" id="4_xt83x"]
+[ext_resource type="Texture2D" uid="uid://kk0i6ha7w8y0" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0098.png" id="4_y31h0"]
+[ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="5_3pmrm"]
+[ext_resource type="Script" path="res://characters/character.gd" id="5_a2p6l"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="6_jcnsq"]
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="8_vf5sy"]
+[ext_resource type="PackedScene" uid="uid://cqnds800uko31" path="res://components/trigger_component.tscn" id="9_rnfbs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtncl"]
+shader = ExtResource("1_mv5p4")
+shader_parameter/size_effect = 12.0
+shader_parameter/speed = 1.2
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.2
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/onoff = false
+shader_parameter/vertical_gradient = ExtResource("3_a4f3l")
+shader_parameter/color_gradient = ExtResource("2_xy2ug")
+
+[sub_resource type="GDScript" id="GDScript_c6gtw"]
+script/source = "extends Trigger
+
+
+func trigger_effect(target):
+	SignalBus.trigger_dialogue.emit(\"warrior\")
+	await SignalBus.dialogue_triggered
+	if target.has_method(\"stop_animation\"):
+		target.stop_animation()
+	get_parent().get_parent().get_node(\"AnimationPlayer\").play(\"hit\")
+	await get_parent().get_parent().get_node(\"AnimationPlayer\").animation_finished
+	if target.has_method(\"kill\"):
+		target.kill()
+	complete.emit()
+"
+
+[sub_resource type="Animation" id="Animation_awlia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n2itt"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, -4), Vector2(2, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5igke"]
+_data = {
+"RESET": SubResource("Animation_awlia"),
+"hit": SubResource("Animation_n2itt")
+}
+
+[node name="Warrior" type="Sprite2D"]
+material = SubResource("ShaderMaterial_qtncl")
+texture = ExtResource("4_y31h0")
+script = ExtResource("5_a2p6l")
+
+[node name="MoveComponent" parent="." node_paths=PackedStringArray("self_node") instance=ExtResource("4_xt83x")]
+self_node = NodePath("..")
+
+[node name="CollisionComponent" parent="." instance=ExtResource("5_3pmrm")]
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_jcnsq")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+haunt_target = NodePath("../../../..")
+energy_cost = 2
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Trigger" parent="Triggers" instance=ExtResource("8_vf5sy")]
+position = Vector2(0, 16)
+script = SubResource("GDScript_c6gtw")
+
+[node name="Trigger2" parent="Triggers" instance=ExtResource("8_vf5sy")]
+position = Vector2(16, 0)
+script = SubResource("GDScript_c6gtw")
+
+[node name="Trigger3" parent="Triggers" instance=ExtResource("8_vf5sy")]
+position = Vector2(0, -16)
+script = SubResource("GDScript_c6gtw")
+
+[node name="Trigger4" parent="Triggers" instance=ExtResource("8_vf5sy")]
+position = Vector2(-16, 0)
+script = SubResource("GDScript_c6gtw")
+
+[node name="TriggerComponent" parent="." instance=ExtResource("9_rnfbs")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5igke")
+}
+speed_scale = 3.0
+
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]

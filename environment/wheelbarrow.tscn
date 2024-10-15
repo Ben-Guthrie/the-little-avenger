@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://idac6wrpasgv"]
+
+[ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_3vhhp"]
+[ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_no36v"]
+[ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_6dhuk"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="3_mnr72"]
+[ext_resource type="Texture2D" uid="uid://eli57v33dl3c" path="res://assets/kenney_tiny-town/Tiles/tile_0057.png" id="4_4paxo"]
+[ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="4_q32pw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fr7x5"]
+shader = ExtResource("1_3vhhp")
+shader_parameter/size_effect = 12.0
+shader_parameter/speed = 1.2
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.2
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/onoff = false
+shader_parameter/vertical_gradient = ExtResource("3_6dhuk")
+shader_parameter/color_gradient = ExtResource("2_no36v")
+
+[node name="Wheelbarrow" type="Sprite2D"]
+material = SubResource("ShaderMaterial_fr7x5")
+texture = ExtResource("4_4paxo")
+region_rect = Rect2(-2, -2, 20, 20)
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_mnr72")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+haunt_target = NodePath("../../../..")
+
+[node name="CollisionComponent" parent="." instance=ExtResource("4_q32pw")]
+
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]

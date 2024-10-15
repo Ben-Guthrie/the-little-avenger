@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://hftiqta7u7hm"]
+
+[ext_resource type="Script" path="res://utils/location_selector.gd" id="1_lc4xt"]
+[ext_resource type="Texture2D" uid="uid://kcbbj82tif7v" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0060.png" id="1_ng678"]
+
+[node name="LocationSelector" type="Node2D"]
+script = ExtResource("1_lc4xt")
+
+[node name="Node2D" type="TextureRect" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_ng678")
+
+[connection signal="gui_input" from="Node2D" to="." method="_on_node_2d_gui_input"]

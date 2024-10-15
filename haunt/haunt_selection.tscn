@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvwo2itlsd4pw"]
+
+[ext_resource type="Script" path="res://haunt/haunt_selection.gd" id="1_q016s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rr166"]
+modulate_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+
+[node name="HauntSelection" type="VBoxContainer"]
+script = ExtResource("1_q016s")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_disabled_color = Color(0.384198, 0.371424, 0.36504, 1)
+theme_override_colors/font_hover_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/hover = SubResource("StyleBoxTexture_rr166")
+text = "Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

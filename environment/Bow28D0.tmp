@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6cxf2hu7tv3m"]
+
+[ext_resource type="Texture2D" uid="uid://be80bhdfl3b2j" path="res://assets/kenney_tiny-town/Tiles/tile_0118.png" id="1_xxj7p"]
+[ext_resource type="Texture2D" uid="uid://kq87bscrqnjb" path="res://assets/made/bow.png" id="2_6xo0x"]
+[ext_resource type="Script" path="res://environment/bow.gd" id="3_qu4s3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exjav"]
+atlas = ExtResource("2_6xo0x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hkdv"]
+atlas = ExtResource("2_6xo0x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h67j5"]
+atlas = ExtResource("2_6xo0x")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3l3d"]
+atlas = ExtResource("2_6xo0x")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cewx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xxj7p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exjav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hkdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h67j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3l3d")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Bow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0cewx")
+autoplay = "default"
+script = ExtResource("3_qu4s3")

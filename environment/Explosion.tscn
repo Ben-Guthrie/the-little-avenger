@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqhpq6n8b64md"]
+
+[ext_resource type="Texture2D" uid="uid://dlu5327toi84g" path="res://assets/made/explosion.png" id="1_vtmhs"]
+[ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="2_jrvfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp0l7"]
+atlas = ExtResource("1_vtmhs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_movg8"]
+atlas = ExtResource("1_vtmhs")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7kps"]
+atlas = ExtResource("1_vtmhs")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26rxb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp0l7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_movg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7kps")
+}],
+"loop": false,
+"name": &"bang",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_fahoi"]
+script/source = "extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	print(\"explosion\")
+	SignalBus.new_turn.connect(queue_free, CONNECT_ONE_SHOT)
+"
+
+[sub_resource type="GDScript" id="GDScript_wlukj"]
+script/source = "extends Trigger
+
+
+func trigger_effect(target):
+	if target.has_meta(\"is_timmy\"):
+		SignalBus.trigger_dialogue.emit(\"bomb_death\")
+		await SignalBus.dialogue_triggered
+	print(\"explosion triggered\")
+	if target.has_method(\"kill\"):
+		target.kill()
+	complete.emit.call_deferred()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yecc"]
+size = Vector2(16, 16)
+
+[node name="Explosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_26rxb")
+animation = &"bang"
+autoplay = "bang"
+frame = 2
+frame_progress = 1.0
+script = SubResource("GDScript_fahoi")
+
+[node name="Trigger" parent="." instance=ExtResource("2_jrvfb")]
+input_pickable = false
+script = SubResource("GDScript_wlukj")
+
+[node name="CollisionShape2D" parent="Trigger" index="0"]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(16, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-16, -16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-16, 16)
+shape = SubResource("RectangleShape2D_7yecc")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource("RectangleShape2D_7yecc")
+
+[editable path="Trigger"]

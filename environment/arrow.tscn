@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdul35s0njqog"]
+
+[ext_resource type="Texture2D" uid="uid://dpwn0ehg7ijwb" path="res://assets/made/arrow.png" id="1_i4x0n"]
+[ext_resource type="PackedScene" uid="uid://265bu6cxmm3h" path="res://components/throw_component.tscn" id="2_lrjm8"]
+
+[node name="Arrow" type="Sprite2D"]
+texture = ExtResource("1_i4x0n")
+
+[node name="ThrowComponent" parent="." node_paths=PackedStringArray("self_node") instance=ExtResource("2_lrjm8")]
+self_node = NodePath("..")
+
+[editable path="ThrowComponent"]

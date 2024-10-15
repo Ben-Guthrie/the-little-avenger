@@ -1,0 +1,33 @@
+~ bow
+if !("bow" in viewed_dialogue):
+	Little Timmy: Ooh, a bow!
+	set viewed_dialogue.append("bow")
+=> END
+
+~ warrior
+if !("warrior" in viewed_dialogue):
+	Little Timmy: Hmm. Maybe I should have used the bow on this guy.
+	set viewed_dialogue.append("warrior")
+=> END
+
+~ chest
+if !("chest" in viewed_dialogue):	
+	Little Timmy: Ooh, treasure!
+	set viewed_dialogue.append("chest")
+=> END
+
+~ bomb
+if !("bomb" in viewed_dialogue):
+	Little Timmy: Ooh, a bomb!
+	set viewed_dialogue.append("bomb")
+=> END
+
+~ bomb_death
+if !("bomb_death" in viewed_dialogue):
+	Little Timmy: Why was it armed??
+	Gramps: Really? You think that's the issue with what just happened?
+	set viewed_dialogue.append("bomb_death")
+=> END
+
+~ none
+=> END

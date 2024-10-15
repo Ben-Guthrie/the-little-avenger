@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d00fygeomk8ht"]
+
+[ext_resource type="Script" path="res://globals/colors.gd" id="1_ikc16"]
+
+[node name="Colors" type="Node"]
+script = ExtResource("1_ikc16")
+energy_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
