@@ -19,7 +19,7 @@ func shoot(direction: Vector2):
 	arrow.get_node("ThrowComponent").throw(direction)
 
 func _on_hit(target, arrow):
-	print("hit ", target)
+	#print("hit ", target)
 	var tween = create_tween()
 	if target != null:
 		if target is StaticBody2D and target.get_parent().has_method("kill"):

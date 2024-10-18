@@ -73,12 +73,12 @@ func create_level():
 		$MouseMask.add_child(current_scene)
 		$GameUI.hide()
 	else:
-		print("starting level ", current_level)
+		#print("starting level ", current_level)
 		current_scene = level_scenes[current_level].instantiate()
 		$MouseMask.add_child(current_scene)
 
 func next_level():
-	print("next level")
+	#print("next level")
 	Game.resets = 0
 	current_scene.queue_free()
 	$SceneTransition.play("fade_in")

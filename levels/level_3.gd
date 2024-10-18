@@ -15,7 +15,7 @@ func play_intro():
 
 func play_dialogue(title: String):
 	SignalBus.pause_animation.emit()
-	print("dialogue triggered: ", title)
+	#print("dialogue triggered: ", title)
 	if !(title in ["bomb", "chest", "bomb_death"]):
 		title = "none"
 	DialogueManager.show_dialogue_balloon(preload("res://globals/dialogue/general.dialogue"), title)

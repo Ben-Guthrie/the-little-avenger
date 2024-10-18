@@ -30,6 +30,7 @@ unfocusable = false
 stream = ExtResource("3_0y5bx")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [connection signal="continue_game" from="MainMenu" to="." method="_on_main_menu_continue_game"]
 [connection signal="new_game" from="MainMenu" to="." method="_on_main_menu_new_game"]

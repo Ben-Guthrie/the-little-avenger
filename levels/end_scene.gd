@@ -9,8 +9,8 @@ func _ready() -> void:
 
 
 func play_intro():
-	print("end scene")
+	#print("end scene")
 	DialogueManager.show_dialogue_balloon.call_deferred(preload("res://globals/dialogue/intro.dialogue"), "end_intro")
 	await DialogueManager.dialogue_ended
-	print("dialogue ended")
+	#print("dialogue ended")
 	SignalBus.start.emit.call_deferred()

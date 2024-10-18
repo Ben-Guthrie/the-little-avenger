@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cm5mb46hc8s2w"]
+[gd_scene load_steps=17 format=4 uid="uid://cm5mb46hc8s2w"]
 
 [ext_resource type="Script" path="res://levels/level_3.gd" id="1_t28vs"]
 [ext_resource type="TileSet" uid="uid://bpqj3wfubuunh" path="res://assets/town_tileset.tres" id="2_xnwxc"]
@@ -49,30 +49,6 @@ func trigger_effect(target: Node):
 	SignalBus.level_complete.emit()
 	queue_free()
 "
-
-[sub_resource type="GDScript" id="GDScript_bhjcj"]
-script/source = "extends Trigger
-
-
-func trigger_effect(target):
-	print(\"chest triggered\")
-	if \"path\" in target:
-		if target.has_meta(\"is_timmy\"):
-			print(\"is timmy\")
-			SignalBus.trigger_dialogue.emit(\"chest\")
-			await SignalBus.dialogue_triggered
-		var marker = Marker2D.new()
-		marker.global_position = get_parent().get_parent().global_position
-		target.path.add_child(marker)
-		target.path.move_child(marker, 0)
-		complete.emit.call_deferred()
-		print(\"complete\")
-	else:
-		complete.emit()
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vb1o"]
-size = Vector2(16, 16)
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_t28vs")
@@ -150,60 +126,7 @@ position = Vector2(8, 120)
 [node name="Marker2D" type="Marker2D" parent="Paths/Warrior"]
 position = Vector2(184, 104)
 
-[node name="Trigger" parent="." instance=ExtResource("7_nj7p8")]
-position = Vector2(0, 16)
-script = SubResource("GDScript_bhjcj")
-
-[node name="CollisionShape2D" parent="Trigger" index="0"]
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, 32)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(16, -16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(32, -16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(48, -16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, -32)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, -48)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, -64)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(-16, -16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(-32, -16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(-48, -16)
-shape = SubResource("RectangleShape2D_6vb1o")
-
 [node name="LevelStartTimer" type="Timer" parent="."]
 wait_time = 0.5
 
 [connection signal="timmy_dies" from="Characters/Timmy" to="." method="_on_timmy_timmy_dies"]
-
-[editable path="Trigger"]

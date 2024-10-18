@@ -15,13 +15,13 @@ func throw(direction: Vector2):
 	$ThrowComponent.throw(direction, throw_distance)
 
 func _on_hit(target):
-	print("hit at ", global_position)
+	#print("hit at ", global_position)
 	if armed:
 		var explosion = explosion_scene.instantiate()
 		explosion.global_position = global_position
 		get_parent().add_child.call_deferred(explosion)
 		await explosion.animation_finished
-		print(explosion.global_position)
+		#print(explosion.global_position)
 		check_if_targets_in_explosion.call_deferred(explosion)
 		queue_free.call_deferred()
 	else:
@@ -29,7 +29,7 @@ func _on_hit(target):
 
 func check_if_targets_in_explosion(explosion):
 	await Game.main_scene.current_scene.check_triggers(explosion.get_node("Trigger"))
-	print("hit emit")
+	#print("hit emit")
 	hit.emit.call_deferred()
 	queue_free.call_deferred()
 

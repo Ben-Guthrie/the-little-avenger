@@ -37,7 +37,7 @@ func move(direction: Vector2) -> void:
 		moving.emit(moving_direction)
 
 func after_move(from: Vector2, to: Vector2):
-	print("after move")
+	#print("after move")
 	moving_direction = Vector2.ZERO
 	SignalBus.moved.emit(to, from)
 	moved.emit(to, from)

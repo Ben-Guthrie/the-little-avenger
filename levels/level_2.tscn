@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://d1kuwy5qu1s11"]
+[gd_scene load_steps=27 format=4 uid="uid://d1kuwy5qu1s11"]
 
 [ext_resource type="Script" path="res://levels/level_2.gd" id="1_f4r2e"]
 [ext_resource type="TileSet" uid="uid://bpqj3wfubuunh" path="res://assets/town_tileset.tres" id="1_gftnd"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://kq87bscrqnjb" path="res://assets/made/bow.png" id="8_jp1t0"]
 [ext_resource type="PackedScene" uid="uid://3bar45d4qj4m" path="res://characters/warrior.tscn" id="10_2bcsc"]
 [ext_resource type="PackedScene" uid="uid://b0v20701d0m0c" path="res://environment/open_chest.tscn" id="10_3ol3d"]
+[ext_resource type="PackedScene" uid="uid://b56qejuvt8ebn" path="res://components/tooltip_component.tscn" id="11_kt47n"]
 [ext_resource type="PackedScene" uid="uid://dolou4guv44a3" path="res://characters/archer.tscn" id="11_sp2r0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exf8q"]
@@ -162,6 +163,9 @@ sprite = NodePath("..")
 
 [node name="Move" parent="Hauntable/Bow/HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
 haunt_target = NodePath("../../../..")
+
+[node name="TooltipComponent" parent="Hauntable/Bow" instance=ExtResource("11_kt47n")]
+tooltip_text = "Timmy will shoot it where he's facing"
 
 [node name="Bush" parent="Hauntable" instance=ExtResource("8_jhmy0")]
 material = SubResource("ShaderMaterial_0jnsp")

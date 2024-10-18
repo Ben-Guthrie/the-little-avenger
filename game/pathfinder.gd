@@ -41,13 +41,13 @@ func find_path(start_position: Vector2, end_position: Vector2) -> Array:
 	# Convert world positions to tile grid positions
 	var start_tile = world_to_tile(start_position)
 	var end_tile = world_to_tile(end_position)
-	print(start_tile, end_tile)
+	#print(start_tile, end_tile)
 
 	# Get unique point IDs for A* based on tile positions
 	var start_point_id = tile_to_point_id(start_tile)
 	var end_point_id = tile_to_point_id(end_tile)
-	print(start_point_id, astar.has_point(start_point_id))
-	print(end_point_id, astar.has_point(end_point_id))
+	#print(start_point_id, astar.has_point(start_point_id))
+	#print(end_point_id, astar.has_point(end_point_id))
 	
 	astar.set_point_disabled(start_point_id, false)
 

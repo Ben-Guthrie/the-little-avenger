@@ -8,7 +8,7 @@ signal hit(target)
 signal moved
 
 func throw(direction: Vector2, distance=INF):
-	print(distance)
+	#print(distance)
 	if (distance <= 0):
 		hit.emit.call_deferred(null)
 	else:
@@ -33,7 +33,7 @@ func move(direction: Vector2):
 		
 		var new_position = self_node.global_position + (movement * Constants.TILE_SIZE)
 		if new_position.x > grid_size.x || new_position.y > grid_size.y || new_position.x < 0 || new_position.y < 0:
-			print(new_position, grid_size)
+			#print(new_position, grid_size)
 			hit.emit(null)
 			return false
 		

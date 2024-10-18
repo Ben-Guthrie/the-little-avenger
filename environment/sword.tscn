@@ -1,6 +1,5 @@
 [gd_scene load_steps=14 format=3 uid="uid://bhodgdmevucsl"]
 
-[ext_resource type="Texture2D" uid="uid://b14j4sh7d8oyx" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0104.png" id="1_77vco"]
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_bhdb3"]
 [ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_cbnhv"]
 [ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="2_sjmjh"]
@@ -20,6 +19,9 @@ shader_parameter/texture_size = Vector2(16, 16)
 shader_parameter/onoff = false
 shader_parameter/vertical_gradient = ExtResource("3_mgbqg")
 shader_parameter/color_gradient = ExtResource("2_cbnhv")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yo5xd"]
+load_path = "res://.godot/imported/tile_0104.png-41be5fa158bfeaec6e1f599ced792515.ctex"
 
 [sub_resource type="GDScript" id="GDScript_s6uk3"]
 script/source = "extends Trigger
@@ -117,7 +119,7 @@ _data = {
 
 [node name="Sword" type="Sprite2D"]
 material = SubResource("ShaderMaterial_lpn2n")
-texture = ExtResource("1_77vco")
+texture = SubResource("CompressedTexture2D_yo5xd")
 
 [node name="Trigger" parent="." instance=ExtResource("2_sjmjh")]
 script = SubResource("GDScript_s6uk3")

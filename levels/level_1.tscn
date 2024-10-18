@@ -150,9 +150,7 @@ tile_set = ExtResource("1_ccbd7")
 [node name="RiverTrigger" parent="Triggers" instance=ExtResource("7_k4aph")]
 position = Vector2(40, 120)
 script = SubResource("GDScript_3yuga")
-targets = Array[Node]([Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(264, 104),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":Resource("res://characters/timmy.gd"),"path":Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":null)
-,"metadata/is_timmy":true)
-])
+targets = Array[Node]([null])
 
 [node name="EndTrigger" parent="Triggers" node_paths=PackedStringArray("targets") instance=ExtResource("7_k4aph")]
 position = Vector2(8, 120)

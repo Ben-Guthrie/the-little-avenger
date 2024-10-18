@@ -88,7 +88,7 @@ position = Vector2(104, 24)
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Warrior" parent="Characters" instance=ExtResource("9_gdxcn")]
-position = Vector2(200, 104)
+position = Vector2(184, 104)
 
 [node name="Warrior2" parent="Characters" instance=ExtResource("9_gdxcn")]
 material = SubResource("ShaderMaterial_48ut6")

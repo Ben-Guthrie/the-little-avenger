@@ -16,7 +16,7 @@ func play_intro():
 	Game.main_scene.start()
 
 func play_dialogue(title: String):
-	print("dialogue triggered: ", title)
+	#print("dialogue triggered: ", title)
 	if !(title in ["sword", "sword2"]):
 		title = "none"
 	DialogueManager.show_dialogue_balloon(preload("res://globals/dialogue/general.dialogue"), title)

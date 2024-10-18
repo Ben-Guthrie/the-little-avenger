@@ -15,7 +15,7 @@ func play_intro():
 	Game.main_scene.start()
 
 func play_dialogue(title: String):
-	print("dialogue triggered: ", title)
+	#print("dialogue triggered: ", title)
 	if title == "bomb_death":
 		title = "level_5_death"
 	if !(title in ["level_5_death"]):
