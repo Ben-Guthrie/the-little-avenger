@@ -24,9 +24,10 @@ func _ready() -> void:
 func continue_game():
 	if current_scene != null:
 		current_scene.queue_free()
-	create_level()
+	
 	$SceneTransition.play("fade_in")
 	await $SceneTransition.animation_finished
+	create_level()
 	$SceneTransition.play("fade_out")
 	
 
@@ -94,6 +95,9 @@ func end_game():
 	$SceneTransition.play("fade_in", -1, 0.2)
 	await $SceneTransition.animation_finished
 	current_scene.queue_free()
+	SignalBus.open_credits.emit()
+	SignalBus.return_to_menu.emit()
+	$SceneTransition.play("fade_out")
 
 func highlight_buttons():
 	$GameUI.highlight_buttons()

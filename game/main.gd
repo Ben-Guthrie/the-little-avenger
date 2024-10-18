@@ -16,7 +16,7 @@ func _on_main_menu_continue_game() -> void:
 	$Game.continue_game.call_deferred()
 
 func _on_return_to_main():
-	$Game.hide()
+	$Game.current_scene.queue_free()
 	menu = preload("res://game/main_menu.tscn").instantiate()
 	add_child(menu)
 	move_child(menu, 1)
