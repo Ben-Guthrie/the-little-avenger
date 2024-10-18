@@ -20,6 +20,7 @@ func _on_start():
 	move_units()
 
 func check_triggers(trigger_target = null):
+	SignalBus.pause_animation.emit()
 	for character in $Characters.get_children():
 		if is_instance_valid(character) and character.has_node("TriggerComponent") and !character.get("is_dead"):
 			print("checking trigger")
@@ -44,6 +45,7 @@ func move_units():
 
 func move_unit(unit: Node2D, path_markers: Node2D):
 	if path_markers.get_child_count() == 0:
+		print("no path")
 		return
 	var destination = path_markers.get_child(0).global_position
 	print("move ", unit, " to ", destination)
@@ -63,7 +65,7 @@ func move_unit(unit: Node2D, path_markers: Node2D):
 
 func _on_object_moved(_from: Vector2, _to: Vector2):
 	print("moved")
-	if units_to_move:
+	if units_to_move != 0:
 		units_moved += 1
 		print(units_moved, units_to_move)
 		if units_moved == units_to_move:

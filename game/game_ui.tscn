@@ -1,8 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://b3dqi76hv7sfu"]
+[gd_scene load_steps=22 format=3 uid="uid://b3dqi76hv7sfu"]
 
 [ext_resource type="Script" path="res://game/game_ui.gd" id="1_f1o6k"]
 [ext_resource type="Texture2D" uid="uid://burr2g6ieutiq" path="res://assets/made/start.png" id="2_btk5w"]
+[ext_resource type="Texture2D" uid="uid://bcq8ao2f8cupk" path="res://assets/made/energy.png" id="2_hg731"]
 [ext_resource type="Texture2D" uid="uid://gfcwwqwstt1u" path="res://assets/made/reset.png" id="3_1d2xn"]
+[ext_resource type="Texture2D" uid="uid://b60ceceuy7t00" path="res://assets/made/options.png" id="3_01n16"]
 
 [sub_resource type="Animation" id="Animation_gf5yt"]
 length = 0.001
@@ -157,51 +159,45 @@ offset_bottom = 24.0
 
 [node name="ColorRect3" type="ColorRect" parent="Highlights"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 28.0
+offset_left = 9.0
+offset_top = 34.0
+offset_right = 21.0
+offset_bottom = 46.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.1
-anchor_right = 0.02
-anchor_bottom = 0.1
+anchor_left = 0.035
+anchor_top = 0.2
+anchor_right = 0.035
+anchor_bottom = 0.2
 offset_right = 8.0
 offset_bottom = 80.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+texture = ExtResource("2_hg731")
 
-[node name="ColorRect2" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+texture = ExtResource("2_hg731")
 
-[node name="ColorRect3" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+texture = ExtResource("2_hg731")
 
-[node name="ColorRect4" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+texture = ExtResource("2_hg731")
 
-[node name="ColorRect5" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+[node name="TextureRect5" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+texture = ExtResource("2_hg731")
 
-[node name="ColorRect6" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+[node name="TextureRect6" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+texture = ExtResource("2_hg731")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
@@ -222,6 +218,26 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_tfqqj")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_85dwi")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tvx5a")
 icon = ExtResource("2_btk5w")
+
+[node name="OptionsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mjtn8")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_lsm71")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2sv27")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_5cben")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_2emgx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mksrj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pv0tg")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_astbe")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tfqqj")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_85dwi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tvx5a")
+icon = ExtResource("3_01n16")
 
 [node name="ResetButton" type="Button" parent="."]
 layout_mode = 0
@@ -245,5 +261,23 @@ text = "
 "
 icon = ExtResource("3_1d2xn")
 
+[node name="Tooltip" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

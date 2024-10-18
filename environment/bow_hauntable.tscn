@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://dmp12y11viqye"]
+
+[ext_resource type="Texture2D" uid="uid://be80bhdfl3b2j" path="res://assets/kenney_tiny-town/Tiles/tile_0118.png" id="1_1rgio"]
+[ext_resource type="Material" uid="uid://dtcoib8coihye" path="res://shaders/outline_material.tres" id="1_rgc34"]
+[ext_resource type="Texture2D" uid="uid://kq87bscrqnjb" path="res://assets/made/bow.png" id="2_lef1k"]
+[ext_resource type="Script" path="res://environment/bow.gd" id="3_5gfyl"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="4_g7fda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exjav"]
+atlas = ExtResource("2_lef1k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hkdv"]
+atlas = ExtResource("2_lef1k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h67j5"]
+atlas = ExtResource("2_lef1k")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3l3d"]
+atlas = ExtResource("2_lef1k")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cewx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1rgio")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exjav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hkdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h67j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3l3d")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_2crt2"]
+script/source = "extends Trigger
+
+var dialogue = preload(\"res://globals/dialogue/general.dialogue\")
+
+func trigger_effect(target):
+	var direction = get_parent().global_position - target.global_position
+	if target.has_method(\"play_idle\"):
+		target.play_idle(direction)
+	DialogueManager.dialogue_ended.connect(func(_res): shoot(direction), CONNECT_ONE_SHOT)
+	DialogueManager.show_dialogue_balloon(dialogue, \"bow\")
+
+func shoot(direction):
+	await get_parent().shoot(direction)
+	remove_triggers()
+	complete.emit()
+
+func remove_triggers():
+	for child in get_parent().get_children():
+		if child is Trigger:
+			child.queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33jbr"]
+size = Vector2(16, 16)
+
+[node name="Bow" type="AnimatedSprite2D"]
+material = ExtResource("1_rgc34")
+sprite_frames = SubResource("SpriteFrames_0cewx")
+autoplay = "default"
+script = ExtResource("3_5gfyl")
+
+[node name="Trigger" type="Area2D" parent="."]
+position = Vector2(0, 16)
+collision_layer = 2
+collision_mask = 0
+script = SubResource("GDScript_2crt2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource("RectangleShape2D_33jbr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(16, -16)
+shape = SubResource("RectangleShape2D_33jbr")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_33jbr")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-16, -16)
+shape = SubResource("RectangleShape2D_33jbr")
+
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_g7fda")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+haunt_target = NodePath("../../../..")
+
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]

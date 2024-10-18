@@ -17,6 +17,10 @@ func _ready() -> void:
 		if child is ColorRect:
 			child.hide()
 	SignalBus.reset.connect($StartButton.show)
+	SignalBus.show_tooltip.connect(show_tooltip)
+	SignalBus.hide_tooltip.connect(hide_tooltip)
+	SignalBus.reset.connect(hide_tooltip)
+	SignalBus.start.connect(hide_tooltip)
 
 func highlight_buttons():
 	$Highlights/AnimationPlayer.play("flash_buttons")
@@ -27,6 +31,14 @@ func highlight_energy():
 func stop_highlight():
 	$Highlights/AnimationPlayer.stop()
 
+func show_tooltip(text):
+	$Tooltip.text = text
+	$Tooltip.show()
+
+func hide_tooltip():
+	$Tooltip.text = ""
+	$Tooltip.hide()
+
 
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()
@@ -35,3 +47,7 @@ func _on_start_button_pressed() -> void:
 
 func _on_reset_button_pressed() -> void:
 	SignalBus.reset.emit()
+
+
+func _on_options_button_pressed() -> void:
+	SignalBus.open_menu.emit()

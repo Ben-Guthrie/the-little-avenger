@@ -11,12 +11,13 @@ func _ready() -> void:
 		play_intro.call_deferred()
 
 func play_intro():
-	await play_dialogue("level_3")
+	DialogueManager.show_dialogue_balloon(preload("res://globals/dialogue/intro.dialogue"), "level_4")
+	await DialogueManager.dialogue_ended
 	Game.main_scene.start()
 
 func play_dialogue(title: String):
 	print("dialogue triggered: ", title)
-	if !(title in []):
+	if !(title in ["sword", "sword2"]):
 		title = "none"
 	DialogueManager.show_dialogue_balloon(preload("res://globals/dialogue/general.dialogue"), title)
 	await DialogueManager.dialogue_ended

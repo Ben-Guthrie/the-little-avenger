@@ -1,22 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvwo2itlsd4pw"]
+[gd_scene load_steps=13 format=3 uid="uid://cvwo2itlsd4pw"]
 
 [ext_resource type="Script" path="res://haunt/haunt_selection.gd" id="1_q016s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_baiij"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vjo1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jpi1r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jljgu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a3y6h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxa8x"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rr166"]
 modulate_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l8iqo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbncs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m1vdy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_snitq"]
+
 [node name="HauntSelection" type="VBoxContainer"]
+theme_override_constants/separation = 2
 script = ExtResource("1_q016s")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"FlatButton"
-theme_override_colors/font_disabled_color = Color(0.384198, 0.371424, 0.36504, 1)
-theme_override_colors/font_hover_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0.196812, 0.339157, 0.379237, 1)
+theme_override_colors/font_hover_pressed_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+theme_override_colors/font_hover_color = Color(0.0768631, 0.535602, 0.699253, 1)
+theme_override_colors/font_color = Color(4.81307e-07, 0.751622, 0.760181, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_baiij")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_2vjo1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jpi1r")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jljgu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a3y6h")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_pxa8x")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rr166")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_l8iqo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cbncs")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m1vdy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_snitq")
 text = "Name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -24,7 +57,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(4.81307e-07, 0.751622, 0.760181, 1)
 

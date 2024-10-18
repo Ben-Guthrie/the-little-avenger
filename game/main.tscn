@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://j1yw1o188y56"]
+
+[ext_resource type="Script" path="res://game/main.gd" id="1_q2yeg"]
+[ext_resource type="PackedScene" uid="uid://dh03xvg5bxx10" path="res://game/main_menu.tscn" id="1_wlpa7"]
+[ext_resource type="PackedScene" uid="uid://3g4ohhjt14ty" path="res://game/game.tscn" id="2_e11pm"]
+[ext_resource type="AudioStream" uid="uid://de7w06v6if2ud" path="res://assets/Morning.mp3" id="3_0y5bx"]
+[ext_resource type="PackedScene" uid="uid://dxv5gj7osxfx6" path="res://game/options.tscn" id="4_2p15d"]
+[ext_resource type="PackedScene" uid="uid://g3c1hnqr422q" path="res://game/in_game_menu.tscn" id="6_o5m14"]
+[ext_resource type="PackedScene" uid="uid://dxmub6uuf0hvs" path="res://game/credits.tscn" id="6_v5s3m"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_q2yeg")
+
+[node name="Game" parent="." instance=ExtResource("2_e11pm")]
+
+[node name="MainMenu" parent="." instance=ExtResource("1_wlpa7")]
+
+[node name="Options" parent="." instance=ExtResource("4_2p15d")]
+visible = false
+z_index = 100
+
+[node name="Credits" parent="." instance=ExtResource("6_v5s3m")]
+visible = false
+
+[node name="InGameMenu" parent="." instance=ExtResource("6_o5m14")]
+visible = false
+unfocusable = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0y5bx")
+autoplay = true
+bus = &"Music"
+
+[connection signal="continue_game" from="MainMenu" to="." method="_on_main_menu_continue_game"]
+[connection signal="new_game" from="MainMenu" to="." method="_on_main_menu_new_game"]

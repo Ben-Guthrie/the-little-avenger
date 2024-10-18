@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cqx28vp8kokba"]
+[gd_scene load_steps=15 format=3 uid="uid://cqx28vp8kokba"]
 
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_fgsyw"]
 [ext_resource type="PackedScene" uid="uid://y352sddbvrud" path="res://components/move_component.tscn" id="2_aogtl"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://components/hauntable_component.gd" id="5_ubbqc"]
 [ext_resource type="PackedScene" uid="uid://dikgr2ldyjqsw" path="res://haunt/haunt_ui.tscn" id="6_vip5t"]
 [ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="7_ghaqc"]
-[ext_resource type="Texture2D" uid="uid://c3da5m2rc2hkt" path="res://assets/16x16-RPG-characters/16x16-RPG-characters/sprites/new-style/chibi-layered.png" id="10_8ax03"]
+[ext_resource type="Texture2D" uid="uid://dre8rq63pcpoj" path="res://assets/made/Drowning.png" id="10_ujck0"]
 [ext_resource type="SpriteFrames" uid="uid://cf34llq4pi0wr" path="res://characters/timmy.tres" id="10_vubqs"]
 [ext_resource type="PackedScene" uid="uid://cqnds800uko31" path="res://components/trigger_component.tscn" id="11_sghsb"]
 
@@ -40,10 +40,6 @@ shader_parameter/texture_size = Vector2(16, 16)
 shader_parameter/onoff = false
 shader_parameter/vertical_gradient = ExtResource("3_h3l73")
 shader_parameter/color_gradient = ExtResource("2_bgobx")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4tmwd"]
-atlas = ExtResource("10_8ax03")
-region = Rect2(2, 16, 12, 10)
 
 [node name="Timmy" type="Node2D"]
 material = SubResource("ShaderMaterial_gjqde")
@@ -85,7 +81,7 @@ offset = Vector2(0, -4)
 [node name="Drowning" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -7)
-texture = SubResource("AtlasTexture_4tmwd")
+texture = ExtResource("10_ujck0")
 
 [node name="TriggerComponent" parent="." instance=ExtResource("11_sghsb")]
 

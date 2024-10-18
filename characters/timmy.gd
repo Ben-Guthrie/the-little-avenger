@@ -9,6 +9,8 @@ func _ready():
 	position -= Vector2.ONE * (Constants.TILE_SIZE / 2)
 	$AnimatedSprite2D.play("idle_down")
 	$MoveComponent.moving.connect(moving_animation)
+	SignalBus.pause_animation.connect($AnimatedSprite2D.pause)
+	SignalBus.resume_animation.connect($AnimatedSprite2D.play)
 
 func _process(_delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")

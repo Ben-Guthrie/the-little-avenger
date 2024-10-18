@@ -10,7 +10,7 @@ signal moved
 func throw(direction: Vector2, distance=INF):
 	print(distance)
 	if (distance <= 0):
-		hit.emit(null)
+		hit.emit.call_deferred(null)
 	else:
 		var success = await move(direction)
 		distance -= 1
@@ -28,7 +28,7 @@ func move(direction: Vector2):
 		$RayCast2D.target_position = (movement * Constants.TILE_SIZE).rotated(- $RayCast2D.global_rotation)
 		$RayCast2D.force_raycast_update() # Update the `target_position` immediately
 		if $RayCast2D.is_colliding():
-			hit.emit($RayCast2D.get_collider())
+			hit.emit.call_deferred($RayCast2D.get_collider())
 			return false
 		
 		var new_position = self_node.global_position + (movement * Constants.TILE_SIZE)

@@ -1,8 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhodgdmevucsl"]
+[gd_scene load_steps=14 format=3 uid="uid://bhodgdmevucsl"]
 
 [ext_resource type="Texture2D" uid="uid://b14j4sh7d8oyx" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0104.png" id="1_77vco"]
+[ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_bhdb3"]
+[ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_cbnhv"]
 [ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="2_sjmjh"]
+[ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_mgbqg"]
 [ext_resource type="PackedScene" uid="uid://265bu6cxmm3h" path="res://components/throw_component.tscn" id="3_tdl3r"]
+[ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="7_0pmjc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lpn2n"]
+shader = ExtResource("1_bhdb3")
+shader_parameter/size_effect = 12.0
+shader_parameter/speed = 1.2
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.2
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/onoff = false
+shader_parameter/vertical_gradient = ExtResource("3_mgbqg")
+shader_parameter/color_gradient = ExtResource("2_cbnhv")
 
 [sub_resource type="GDScript" id="GDScript_s6uk3"]
 script/source = "extends Trigger
@@ -12,7 +29,8 @@ var kill_triggers = []
 @export var distance = 3
 
 func trigger_effect(target):
-	
+	SignalBus.trigger_dialogue.emit(\"sword\")
+	await SignalBus.dialogue_triggered
 	var target_start = target.global_position
 	var start = global_position
 	var direction = (global_position - target.global_position).normalized()
@@ -31,6 +49,7 @@ func trigger_effect(target):
 	throw_component.throw(direction, distance)
 	
 	await throw_component.hit
+	print(\"hit\")
 	target.get_node(\"MoveComponent\").moved.emit(target.global_position, target_start)
 	SignalBus.moved.emit(target.global_position, target_start)
 	
@@ -39,6 +58,8 @@ func trigger_effect(target):
 		await Game.main_scene.current_scene.check_triggers(kill_triggers[i])
 	
 	get_parent().reparent(old_parent)
+	SignalBus.trigger_dialogue.emit(\"sword2\")
+	await SignalBus.dialogue_triggered
 	complete.emit.call_deferred()
 	
 
@@ -47,7 +68,7 @@ func make_triggers(target, distance, direction):
 		var new_trigger = preload(\"res://triggers/kill_trigger.tscn\").instantiate()
 		new_trigger.exclude.append(target)
 		add_child(new_trigger)
-		new_trigger.global_position = global_position + Constants.TILE_SIZE * (direction)
+		new_trigger.global_position = global_position + Constants.TILE_SIZE * (direction) * i
 		SignalBus.new_turn.connect(new_trigger.queue_free, CONNECT_ONE_SHOT)
 		print(global_position, direction)
 		print(\"added trigger at \", new_trigger.global_position)
@@ -57,21 +78,6 @@ func make_triggers(target, distance, direction):
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7yecc"]
 size = Vector2(16, 16)
-
-[sub_resource type="Animation" id="Animation_6qdo1"]
-resource_name = "use"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 4), Vector2(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_yingt"]
 length = 0.001
@@ -88,6 +94,21 @@ tracks/0/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_6qdo1"]
+resource_name = "use"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 4), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h77po"]
 _data = {
 "RESET": SubResource("Animation_yingt"),
@@ -95,6 +116,7 @@ _data = {
 }
 
 [node name="Sword" type="Sprite2D"]
+material = SubResource("ShaderMaterial_lpn2n")
 texture = ExtResource("1_77vco")
 
 [node name="Trigger" parent="." instance=ExtResource("2_sjmjh")]
@@ -127,4 +149,13 @@ libraries = {
 }
 speed_scale = 4.0
 
+[node name="HauntableComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("7_0pmjc")]
+sprite = NodePath("..")
+
+[node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
+move_range = 2
+haunt_target = NodePath("../../../..")
+
 [editable path="Trigger"]
+[editable path="HauntableComponent"]
+[editable path="HauntableComponent/HauntUI"]

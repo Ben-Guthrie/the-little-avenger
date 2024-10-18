@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://scpge4df51ca"]
+[gd_scene load_steps=11 format=3 uid="uid://scpge4df51ca"]
 
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_wxdap"]
 [ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_cl1wl"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://f1w2ewf0caib" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="4_hq5hw"]
 [ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="5_aatlm"]
 [ext_resource type="PackedScene" uid="uid://tbalimw0m14i" path="res://haunt/change.tscn" id="6_aifk6"]
-[ext_resource type="PackedScene" uid="uid://b0v20701d0m0c" path="res://environment/open_chest.tscn" id="7_d2vbw"]
 [ext_resource type="PackedScene" uid="uid://dm6yekf5namuj" path="res://environment/trap_chest.tscn" id="8_1ugud"]
 [ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="9_lob56"]
 
@@ -46,7 +45,6 @@ haunt_target = NodePath("../../../..")
 
 [node name="Open" parent="HauntableComponent/HauntUI/Options" index="1" node_paths=PackedStringArray("haunt_target") instance=ExtResource("6_aifk6")]
 layout_mode = 2
-new_scene = ExtResource("7_d2vbw")
 haunt_target = NodePath("../../../..")
 
 [node name="Trap" parent="HauntableComponent/HauntUI/Options" index="2" node_paths=PackedStringArray("haunt_target") instance=ExtResource("6_aifk6")]

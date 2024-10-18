@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxmub6uuf0hvs"]
+
+[ext_resource type="Texture2D" uid="uid://bqut3t3hhfcc4" path="res://assets/made/close.png" id="1_ha2hg"]
+[ext_resource type="Script" path="res://game/credits.gd" id="1_unar7"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_unar7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(3.60981e-08, 0.194511, 0.197159, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[center][b]The Little Avenger[/b][/center]
+
+Made by Ben Guthrie for Godot Wild Jam 74, with the theme \"Haunted\".
+Wildcards used: Pursuer, Through the Teeth
+
+[center]Assets[/center]
+Tiny Series Assets by Kenney (Kenney.nl)
+Licensed under Creative Commons CC0
+
+[center]Music[/center]
+\"Morning\" by Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License"
+
+[node name="CloseButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 4.0
+offset_bottom = 16.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_ha2hg")
+texture_pressed = ExtResource("1_ha2hg")
+texture_hover = ExtResource("1_ha2hg")
+texture_disabled = ExtResource("1_ha2hg")
+texture_focused = ExtResource("1_ha2hg")
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

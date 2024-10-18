@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="3_8lsc3"]
 [ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="3_go8nm"]
 [ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="4_jcv40"]
-[ext_resource type="PackedScene" uid="uid://b56qejuvt8ebn" path="res://components/tooltip_component.tscn" id="5_7lpl1"]
+[ext_resource type="PackedScene" uid="uid://eayqofqij6aa" path="res://components/sign_component.tscn" id="8_va20d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r1mx5"]
 shader = ExtResource("1_hipom")
@@ -33,7 +33,7 @@ haunt_target = NodePath("../../../..")
 
 [node name="CollisionComponent" parent="." instance=ExtResource("4_jcv40")]
 
-[node name="TooltipComponent" parent="." instance=ExtResource("5_7lpl1")]
+[node name="SignComponent" parent="." instance=ExtResource("8_va20d")]
 tooltip_text = "Bridge moved for A/B testing"
 
 [editable path="HauntableComponent"]

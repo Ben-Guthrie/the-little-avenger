@@ -11,7 +11,7 @@ if !("warrior" in viewed_dialogue):
 => END
 
 ~ chest
-if !("chest" in viewed_dialogue):	
+if !("chest" in viewed_dialogue):
 	Little Timmy: Ooh, treasure!
 	set viewed_dialogue.append("chest")
 => END
@@ -27,6 +27,25 @@ if !("bomb_death" in viewed_dialogue):
 	Little Timmy: Why was it armed??
 	Gramps: Really? You think that's the issue with what just happened?
 	set viewed_dialogue.append("bomb_death")
+=> END
+
+~ sword
+if !("sword" in viewed_dialogue):
+	Little Timmy: Ooh, a sword!
+	set viewed_dialogue.append("sword")
+=> END
+
+~ sword2
+if !("sword2" in viewed_dialogue):
+	Little Timmy: Woah! Good thing the bad guys don't know how to use those!
+	set viewed_dialogue.append("sword2")
+=> END
+
+~ level_5_death
+if !("level_5_death" in viewed_dialogue):
+	Gramps: Well done.
+	Little Timmy: Why was that chest there?!
+	set viewed_dialogue.append("level_5_death")
 => END
 
 ~ none

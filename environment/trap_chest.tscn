@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dm6yekf5namuj"]
+[gd_scene load_steps=19 format=3 uid="uid://dm6yekf5namuj"]
 
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_bf2qt"]
 [ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_yaath"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="7_hvv6a"]
 [ext_resource type="Texture2D" uid="uid://d0ynwcxxlvqbe" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0090.png" id="8_2lam0"]
 [ext_resource type="Texture2D" uid="uid://f1w2ewf0caib" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="9_kljch"]
+[ext_resource type="PackedScene" uid="uid://b56qejuvt8ebn" path="res://components/tooltip_component.tscn" id="10_m1vuk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dbgw3"]
 shader = ExtResource("1_bf2qt")
@@ -38,33 +39,6 @@ func trigger_effect(target):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7yecc"]
 size = Vector2(16, 16)
 
-[sub_resource type="Animation" id="Animation_74pku"]
-resource_name = "eat"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.666667, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_gx81v"), ExtResource("8_2lam0"), ExtResource("9_kljch"), ExtResource("4_gx81v")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.633333, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_qgupy"]
 length = 0.001
 tracks/0/type = "value"
@@ -90,6 +64,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_74pku"]
+resource_name = "eat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_gx81v"), ExtResource("8_2lam0"), ExtResource("9_kljch"), ExtResource("4_gx81v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6cx5j"]
@@ -196,6 +197,9 @@ shape = SubResource("RectangleShape2D_mflwt")
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="TriggerAttract"]
 position = Vector2(-48, 0)
 shape = SubResource("RectangleShape2D_mflwt")
+
+[node name="TooltipComponent" parent="." instance=ExtResource("10_m1vuk")]
+tooltip_text = "Attracts and eats anyone in line of sight (3 tiles)"
 
 [editable path="HauntableComponent"]
 [editable path="HauntableComponent/HauntUI"]

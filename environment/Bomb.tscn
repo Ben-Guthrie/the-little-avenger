@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://blasv8il4wied"]
+[gd_scene load_steps=16 format=3 uid="uid://blasv8il4wied"]
 
 [ext_resource type="Texture2D" uid="uid://bilnrphsksbqq" path="res://assets/kenney_tiny-town/Tiles/tile_0105.png" id="1_q1eox"]
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_xldbk"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="4_vsnvl"]
 [ext_resource type="Script" path="res://environment/bomb.gd" id="5_ew0h0"]
 [ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="8_cna1f"]
+[ext_resource type="PackedScene" uid="uid://d3fmdqfvs6a22" path="res://haunt/signal.tscn" id="9_7uf1n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wshau"]
 shader = ExtResource("1_xldbk")
@@ -122,8 +123,17 @@ sprite = NodePath("..")
 [node name="Move" parent="HauntableComponent/HauntUI/Options" index="0" node_paths=PackedStringArray("haunt_target")]
 haunt_target = NodePath("../../../..")
 
+[node name="Signal" parent="HauntableComponent/HauntUI/Options" index="1" node_paths=PackedStringArray("haunt_target") instance=ExtResource("9_7uf1n")]
+layout_mode = 2
+haunt_target = NodePath("../../../..")
+
+[node name="Button" parent="HauntableComponent/HauntUI/Options/Signal" index="0"]
+text = "Disarm"
+
 [connection signal="hit" from="ThrowComponent" to="." method="_on_hit"]
+[connection signal="haunt_selected" from="HauntableComponent/HauntUI/Options/Signal" to="." method="_on_signal_haunt_selected"]
 
 [editable path="Trigger"]
 [editable path="HauntableComponent"]
 [editable path="HauntableComponent/HauntUI"]
+[editable path="HauntableComponent/HauntUI/Options/Signal"]

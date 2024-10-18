@@ -14,11 +14,13 @@ func play_intro():
 	Game.main_scene.start()
 
 func play_dialogue(title: String):
+	SignalBus.pause_animation.emit()
 	print("dialogue triggered: ", title)
 	if !(title in ["bomb", "chest", "bomb_death"]):
 		title = "none"
 	DialogueManager.show_dialogue_balloon(preload("res://globals/dialogue/general.dialogue"), title)
 	await DialogueManager.dialogue_ended
+	SignalBus.resume_animation.emit()
 	SignalBus.dialogue_triggered.emit.call_deferred()
 
 

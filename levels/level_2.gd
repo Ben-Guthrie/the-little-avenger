@@ -16,9 +16,11 @@ func _on_timmy_timmy_dies() -> void:
 	SignalBus.reset.emit()
 
 func _on_dialogue_triggered(title: String):
+	SignalBus.pause_animation.emit()
 	print("dialogue triggered: ", title)
 	if !(title in ["warrior", "bow", "chest"]):
 		title = "none"
 	DialogueManager.show_dialogue_balloon(preload("res://globals/dialogue/general.dialogue"), title)
 	await DialogueManager.dialogue_ended
+	SignalBus.resume_animation.emit()
 	SignalBus.dialogue_triggered.emit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://d1kuwy5qu1s11"]
+[gd_scene load_steps=26 format=4 uid="uid://d1kuwy5qu1s11"]
 
 [ext_resource type="Script" path="res://levels/level_2.gd" id="1_f4r2e"]
 [ext_resource type="TileSet" uid="uid://bpqj3wfubuunh" path="res://assets/town_tileset.tres" id="1_gftnd"]
@@ -9,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="5_cdqyx"]
 [ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="5_qobu1"]
 [ext_resource type="Texture2D" uid="uid://caqsdsty08tfr" path="res://shaders/vertical_gradient_texture_1d.tres" id="6_b4co2"]
+[ext_resource type="Texture2D" uid="uid://be80bhdfl3b2j" path="res://assets/kenney_tiny-town/Tiles/tile_0118.png" id="7_f6qe8"]
 [ext_resource type="PackedScene" uid="uid://bkitg7eigb4o" path="res://components/hauntable_component.tscn" id="8_i5ciw"]
 [ext_resource type="PackedScene" uid="uid://cvowmnfl8p3x7" path="res://environment/bush.tscn" id="8_jhmy0"]
+[ext_resource type="Texture2D" uid="uid://kq87bscrqnjb" path="res://assets/made/bow.png" id="8_jp1t0"]
 [ext_resource type="PackedScene" uid="uid://3bar45d4qj4m" path="res://characters/warrior.tscn" id="10_2bcsc"]
 [ext_resource type="PackedScene" uid="uid://b0v20701d0m0c" path="res://environment/open_chest.tscn" id="10_3ol3d"]
 [ext_resource type="PackedScene" uid="uid://dolou4guv44a3" path="res://characters/archer.tscn" id="11_sp2r0"]
@@ -27,6 +29,50 @@ shader_parameter/texture_size = Vector2(16, 16)
 shader_parameter/onoff = false
 shader_parameter/vertical_gradient = ExtResource("6_b4co2")
 shader_parameter/color_gradient = ExtResource("5_qobu1")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exjav"]
+atlas = ExtResource("8_jp1t0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hkdv"]
+atlas = ExtResource("8_jp1t0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h67j5"]
+atlas = ExtResource("8_jp1t0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3l3d"]
+atlas = ExtResource("8_jp1t0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cewx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_f6qe8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exjav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hkdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h67j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3l3d")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
 
 [sub_resource type="GDScript" id="GDScript_qnmtj"]
 script/source = "extends Trigger
@@ -89,6 +135,7 @@ tile_set = ExtResource("1_gftnd")
 [node name="Bow" parent="Hauntable" instance=ExtResource("4_a512k")]
 material = SubResource("ShaderMaterial_exf8q")
 position = Vector2(184, 104)
+sprite_frames = SubResource("SpriteFrames_0cewx")
 
 [node name="Trigger" parent="Hauntable/Bow" node_paths=PackedStringArray("targets") instance=ExtResource("5_cdqyx")]
 position = Vector2(0, 16)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0v20701d0m0c"]
+[gd_scene load_steps=15 format=3 uid="uid://b0v20701d0m0c"]
 
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_wd7pb"]
 [ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_rdbnb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://tbalimw0m14i" path="res://haunt/change.tscn" id="6_yvjvg"]
 [ext_resource type="PackedScene" uid="uid://dm6yekf5namuj" path="res://environment/trap_chest.tscn" id="8_mv3x3"]
 [ext_resource type="PackedScene" uid="uid://1m2umsuy8oo5" path="res://triggers/trigger.tscn" id="8_u660f"]
+[ext_resource type="PackedScene" uid="uid://b56qejuvt8ebn" path="res://components/tooltip_component.tscn" id="10_47112"]
 [ext_resource type="PackedScene" uid="uid://duttm8qe2hx5g" path="res://components/collision_component.tscn" id="10_rdmgj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dbgw3"]
@@ -86,58 +87,71 @@ text = "Trap"
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="Trigger" parent="Triggers" instance=ExtResource("8_u660f")]
-position = Vector2(0, 16)
 script = SubResource("GDScript_xq5j8")
-one_off = false
+
+[node name="CollisionShape2D" parent="Triggers/Trigger" index="0"]
+position = Vector2(0, 16)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_7yecc")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Trigger"]
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(16, -16)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(32, -16)
+[node name="Trigger2" parent="Triggers" instance=ExtResource("8_u660f")]
+script = SubResource("GDScript_xq5j8")
+
+[node name="CollisionShape2D" parent="Triggers/Trigger2" index="0"]
+position = Vector2(16, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/Trigger2"]
+position = Vector2(32, 0)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(48, -16)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Trigger2"]
+position = Vector2(48, 0)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Triggers/Trigger"]
+[node name="Trigger3" parent="Triggers" instance=ExtResource("8_u660f")]
+script = SubResource("GDScript_xq5j8")
+
+[node name="CollisionShape2D" parent="Triggers/Trigger3" index="0"]
+position = Vector2(0, -16)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/Trigger3"]
 position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Triggers/Trigger"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Trigger3"]
 position = Vector2(0, -48)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(0, -64)
+[node name="Trigger4" parent="Triggers" instance=ExtResource("8_u660f")]
+script = SubResource("GDScript_xq5j8")
+
+[node name="CollisionShape2D" parent="Triggers/Trigger4" index="0"]
+position = Vector2(-16, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/Trigger4"]
+position = Vector2(-32, 0)
 shape = SubResource("RectangleShape2D_7yecc")
 
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(-16, -16)
-shape = SubResource("RectangleShape2D_7yecc")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(-32, -16)
-shape = SubResource("RectangleShape2D_7yecc")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="Triggers/Trigger"]
-position = Vector2(-48, -16)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Trigger4"]
+position = Vector2(-48, 0)
 shape = SubResource("RectangleShape2D_7yecc")
 
 [node name="CollisionComponent" parent="." instance=ExtResource("10_rdmgj")]
+
+[node name="TooltipComponent" parent="." instance=ExtResource("10_47112")]
+tooltip_text = "Attracts units in line of sight (3 tiles)"
 
 [editable path="HauntableComponent"]
 [editable path="HauntableComponent/HauntUI"]
 [editable path="HauntableComponent/HauntUI/Options/Close"]
 [editable path="HauntableComponent/HauntUI/Options/Trap"]
 [editable path="Triggers/Trigger"]
+[editable path="Triggers/Trigger2"]
+[editable path="Triggers/Trigger3"]
+[editable path="Triggers/Trigger4"]

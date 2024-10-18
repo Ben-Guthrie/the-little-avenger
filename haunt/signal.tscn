@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3fmdqfvs6a22"]
+
+[ext_resource type="PackedScene" uid="uid://cvwo2itlsd4pw" path="res://haunt/haunt_selection.tscn" id="1_adycs"]
+[ext_resource type="Script" path="res://haunt/signal.gd" id="2_bbn8d"]
+
+[node name="Signal" instance=ExtResource("1_adycs")]
+script = ExtResource("2_bbn8d")

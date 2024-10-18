@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Little Avenger"
-run/main_scene="res://game/game.tscn"
+run/main_scene="res://game/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,7 +26,6 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 [dialogue_manager]
 
 general/states=["Game"]
-general/balloon_path="res://utils/balloon.tscn"
 
 [display]
 
@@ -35,6 +34,7 @@ window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
+window/main_scene="res://game/main.tscn"
 
 [editor_plugins]
 
@@ -42,7 +42,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [gui]
 
-theme/custom_font="res://assets/nudge_orb/Nudge Orb.ttf"
+theme/custom_font="res://assets/menu_card/MenuCard.ttf"
 
 [input]
 

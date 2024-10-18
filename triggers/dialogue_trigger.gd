@@ -4,5 +4,8 @@ extends Trigger
 @export var title: String
 
 func trigger_effect(_target: Node):
-	DialogueManager.dialogue_ended.connect(func(_res): complete.emit(), CONNECT_ONE_SHOT)
+	SignalBus.pause_animation.emit()
 	DialogueManager.show_dialogue_balloon(dialogue_resource, title, [self])
+	await DialogueManager.dialogue_ended
+	SignalBus.resume_animation.emit()
+	complete.emit()
