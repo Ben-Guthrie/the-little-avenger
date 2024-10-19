@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" path="res://addons/dialogue_manager/views/settings_view.tscn" id="9_8bf36"]
 [ext_resource type="PackedScene" path="res://addons/dialogue_manager/components/find_in_files.tscn" id="10_yold3"]
 
-[sub_resource type="Image" id="Image_bdoeg"]
+[sub_resource type="Image" id="Image_3g607"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -21,10 +21,10 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_4scvw"]
-image = SubResource("Image_bdoeg")
+[sub_resource type="ImageTexture" id="ImageTexture_linod"]
+image = SubResource("Image_3g607")
 
-[sub_resource type="SyntaxHighlighter" id="SyntaxHighlighter_ayxgp"]
+[sub_resource type="SyntaxHighlighter" id="SyntaxHighlighter_ekx5m"]
 script = ExtResource("7_necsa")
 
 [node name="MainView" type="Control"]
@@ -70,31 +70,31 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Start a new file"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="OpenButton" type="MenuButton" parent="Margin/Content/SidePanel/Toolbar"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Open a file"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 item_count = 8
 popup/item_0/text = "Open..."
-popup/item_0/icon = SubResource("ImageTexture_4scvw")
+popup/item_0/icon = SubResource("ImageTexture_linod")
 popup/item_0/id = 100
 popup/item_1/id = -1
 popup/item_1/separator = true
 popup/item_2/text = "res://globals/dialogue/general.dialogue"
-popup/item_2/icon = SubResource("ImageTexture_4scvw")
+popup/item_2/icon = SubResource("ImageTexture_linod")
 popup/item_2/id = 2
 popup/item_3/text = "res://globals/dialogue/intro.dialogue"
-popup/item_3/icon = SubResource("ImageTexture_4scvw")
+popup/item_3/icon = SubResource("ImageTexture_linod")
 popup/item_3/id = 3
 popup/item_4/text = "res://globals/dialogue/intro.dialogue"
-popup/item_4/icon = SubResource("ImageTexture_4scvw")
+popup/item_4/icon = SubResource("ImageTexture_linod")
 popup/item_4/id = 4
 popup/item_5/text = "res://globals/dialogue/intro.dialogue"
-popup/item_5/icon = SubResource("ImageTexture_4scvw")
+popup/item_5/icon = SubResource("ImageTexture_linod")
 popup/item_5/id = 5
 popup/item_6/id = -1
 popup/item_6/separator = true
@@ -105,14 +105,14 @@ popup/item_7/id = 101
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="FindInFilesButton" type="Button" parent="Margin/Content/SidePanel/Toolbar"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Find in files..."
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="Bookmarks" type="VSplitContainer" parent="Margin/Content/SidePanel"]
@@ -143,71 +143,71 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Insert"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 item_count = 15
 popup/item_0/text = "Wave BBCode"
-popup/item_0/icon = SubResource("ImageTexture_4scvw")
+popup/item_0/icon = SubResource("ImageTexture_linod")
 popup/item_1/text = "Shake BBCode"
-popup/item_1/icon = SubResource("ImageTexture_4scvw")
+popup/item_1/icon = SubResource("ImageTexture_linod")
 popup/item_1/id = 1
 popup/item_2/id = -1
 popup/item_2/separator = true
 popup/item_3/text = "Typing pause"
-popup/item_3/icon = SubResource("ImageTexture_4scvw")
+popup/item_3/icon = SubResource("ImageTexture_linod")
 popup/item_3/id = 3
 popup/item_4/text = "Typing speed change"
-popup/item_4/icon = SubResource("ImageTexture_4scvw")
+popup/item_4/icon = SubResource("ImageTexture_linod")
 popup/item_4/id = 4
 popup/item_5/text = "Auto advance"
-popup/item_5/icon = SubResource("ImageTexture_4scvw")
+popup/item_5/icon = SubResource("ImageTexture_linod")
 popup/item_5/id = 5
 popup/item_6/text = "Templates"
 popup/item_6/id = -1
 popup/item_6/separator = true
 popup/item_7/text = "Title"
-popup/item_7/icon = SubResource("ImageTexture_4scvw")
+popup/item_7/icon = SubResource("ImageTexture_linod")
 popup/item_7/id = 6
 popup/item_8/text = "Dialogue"
-popup/item_8/icon = SubResource("ImageTexture_4scvw")
+popup/item_8/icon = SubResource("ImageTexture_linod")
 popup/item_8/id = 7
 popup/item_9/text = "Response"
-popup/item_9/icon = SubResource("ImageTexture_4scvw")
+popup/item_9/icon = SubResource("ImageTexture_linod")
 popup/item_9/id = 8
 popup/item_10/text = "Random lines"
-popup/item_10/icon = SubResource("ImageTexture_4scvw")
+popup/item_10/icon = SubResource("ImageTexture_linod")
 popup/item_10/id = 9
 popup/item_11/text = "Random text"
-popup/item_11/icon = SubResource("ImageTexture_4scvw")
+popup/item_11/icon = SubResource("ImageTexture_linod")
 popup/item_11/id = 10
 popup/item_12/text = "Actions"
 popup/item_12/id = -1
 popup/item_12/separator = true
 popup/item_13/text = "Jump to title"
-popup/item_13/icon = SubResource("ImageTexture_4scvw")
+popup/item_13/icon = SubResource("ImageTexture_linod")
 popup/item_13/id = 11
 popup/item_14/text = "End dialogue"
-popup/item_14/icon = SubResource("ImageTexture_4scvw")
+popup/item_14/icon = SubResource("ImageTexture_linod")
 popup/item_14/id = 12
 
 [node name="TranslationsButton" type="MenuButton" parent="Margin/Content/CodePanel/Toolbar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Translations"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 item_count = 5
 popup/item_0/text = "Generate line IDs"
-popup/item_0/icon = SubResource("ImageTexture_4scvw")
+popup/item_0/icon = SubResource("ImageTexture_linod")
 popup/item_0/id = 100
 popup/item_1/id = -1
 popup/item_1/separator = true
 popup/item_2/text = "Save character names to CSV..."
-popup/item_2/icon = SubResource("ImageTexture_4scvw")
+popup/item_2/icon = SubResource("ImageTexture_linod")
 popup/item_2/id = 201
 popup/item_3/text = "Save lines to CSV..."
-popup/item_3/icon = SubResource("ImageTexture_4scvw")
+popup/item_3/icon = SubResource("ImageTexture_linod")
 popup/item_3/id = 202
 popup/item_4/text = "Import line changes from CSV..."
-popup/item_4/icon = SubResource("ImageTexture_4scvw")
+popup/item_4/icon = SubResource("ImageTexture_linod")
 popup/item_4/id = 203
 
 [node name="Separator" type="VSeparator" parent="Margin/Content/CodePanel/Toolbar"]
@@ -218,14 +218,14 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Search for text"
 toggle_mode = true
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="TestButton" type="Button" parent="Margin/Content/CodePanel/Toolbar"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Test dialogue"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="Separator3" type="VSeparator" parent="Margin/Content/CodePanel/Toolbar"]
@@ -235,7 +235,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Settings"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="Spacer2" type="Control" parent="Margin/Content/CodePanel/Toolbar"]
@@ -247,7 +247,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Support Dialogue Manager"
 text = "Sponsor"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="Separator4" type="VSeparator" parent="Margin/Content/CodePanel/Toolbar"]
@@ -257,7 +257,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Docs"
-icon = SubResource("ImageTexture_4scvw")
+icon = SubResource("ImageTexture_linod")
 flat = true
 
 [node name="VersionLabel" type="Label" parent="Margin/Content/CodePanel/Toolbar"]
@@ -313,10 +313,14 @@ Gramps: He's not going to get anywhere on his own.
 do main_scene.highlight_buttons()
 Gramps has the power to rewind and pause time.
 do main_scene.stop_highlight()
-Gramps can haunt objects to help Timmy on his \"adventure\". Click on an object to haunt it.
+Gramps can haunt objects to help Timmy on his \"adventure\". The objects he can haunt are highlighted.
 do main_scene.highlight_energy()
-Gramps can haunt objects until he runs out of energy.
+Click on a highlighted object to haunt it. Gramps can haunt objects until he runs out of energy.
 do main_scene.stop_highlight()
+=> END
+
+~ lie
+Gramps: Maybe I shouldn't be listening to Timmy's advice.
 => END
 
 ~ level_4
@@ -349,7 +353,7 @@ do after_animation()
 
 "
 scroll_smooth = true
-syntax_highlighter = SubResource("SyntaxHighlighter_ayxgp")
+syntax_highlighter = SubResource("SyntaxHighlighter_ekx5m")
 
 [node name="ErrorsPanel" parent="Margin/Content/CodePanel" instance=ExtResource("7_5cvl4")]
 unique_name_in_owner = true

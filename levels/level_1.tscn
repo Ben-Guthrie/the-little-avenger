@@ -147,10 +147,10 @@ tile_set = ExtResource("1_ccbd7")
 
 [node name="Triggers" type="Node2D" parent="."]
 
-[node name="RiverTrigger" parent="Triggers" instance=ExtResource("7_k4aph")]
+[node name="RiverTrigger" parent="Triggers" node_paths=PackedStringArray("targets") instance=ExtResource("7_k4aph")]
 position = Vector2(40, 120)
 script = SubResource("GDScript_3yuga")
-targets = Array[Node]([null])
+targets = [null]
 
 [node name="EndTrigger" parent="Triggers" node_paths=PackedStringArray("targets") instance=ExtResource("7_k4aph")]
 position = Vector2(8, 120)

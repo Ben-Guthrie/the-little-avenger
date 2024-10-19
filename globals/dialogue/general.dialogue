@@ -48,5 +48,11 @@ if !("level_5_death" in viewed_dialogue):
 	set viewed_dialogue.append("level_5_death")
 => END
 
+~ level_6_death
+if !("level_6_death" in viewed_dialogue):
+	Little Timmy: Why didn't he stay behind the tree?!
+	set viewed_dialogue.append("level_6_death")
+=> END
+
 ~ none
 => END

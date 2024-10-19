@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(5.77569e-07, 0.329292, 0.333369, 1)
+color = Color(3.60981e-08, 0.194511, 0.197159, 1)
 script = ExtResource("1_npfjq")
 
 [node name="Options" type="MarginContainer" parent="."]

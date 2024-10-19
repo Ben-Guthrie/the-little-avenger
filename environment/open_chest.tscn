@@ -145,7 +145,7 @@ shape = SubResource("RectangleShape2D_7yecc")
 [node name="CollisionComponent" parent="." instance=ExtResource("10_rdmgj")]
 
 [node name="TooltipComponent" parent="." instance=ExtResource("10_47112")]
-tooltip_text = "Attracts units in line of sight (3 tiles)"
+tooltip_text = "Attracts a unit in line of sight (3 tiles)"
 
 [editable path="HauntableComponent"]
 [editable path="HauntableComponent/HauntUI"]

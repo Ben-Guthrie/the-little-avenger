@@ -21,7 +21,7 @@ func set_highlight(highlight: bool):
 func _on_mouse_exited() -> void:
 	SignalBus.cursor_arrow.emit()
 	hovered = false
-	set_highlight(false)
+	#set_highlight(false)
 
 
 func _on_mouse_entered() -> void:
@@ -29,7 +29,7 @@ func _on_mouse_entered() -> void:
 		return
 	SignalBus.cursor_pointer.emit()
 	hovered = true
-	set_highlight(true)
+	#set_highlight(true)
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if disabled or !Game.can_haunt:

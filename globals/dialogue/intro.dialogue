@@ -25,10 +25,15 @@ Gramps: He's not going to get anywhere on his own.
 do main_scene.highlight_buttons()
 Gramps has the power to rewind and pause time.
 do main_scene.stop_highlight()
-Gramps can haunt objects to help Timmy on his "adventure". Click on an object to haunt it.
+Gramps can haunt objects to help Timmy on his "adventure". The objects he can haunt are highlighted.
 do main_scene.highlight_energy()
-Gramps can haunt objects until he runs out of energy.
+Click on a highlighted object to haunt it. Gramps can haunt objects until he runs out of energy.
 do main_scene.stop_highlight()
+Once you're ready to let Timmy attempt the level, press the play button.
+=> END
+
+~ lie
+Gramps: Maybe I shouldn't be listening to Timmy's advice.
 => END
 
 ~ level_4
@@ -40,7 +45,10 @@ Gramps: The bandits must not have the budget to build differently shaped towns.
 Gramps: Time to use everything you've learned.
 => END
 
-
+~ level_6
+Little Timmy: Adventuring's so easy! I can't believe nothing's gone wrong yet.
+Gramps: ...
+=> END
 
 ~ end_intro
 Little Timmy: We made it to Gramps' house! Now to track down his killers!

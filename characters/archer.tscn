@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dolou4guv44a3"]
 
 [ext_resource type="Shader" path="res://shaders/haunt-outline.gdshader" id="1_lc4ox"]
-[ext_resource type="Texture2D" uid="uid://de74asy4o8veq" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0112.png" id="1_r7i2u"]
+[ext_resource type="Texture2D" uid="uid://lm5c22f7lch0" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0112.png" id="1_r7i2u"]
 [ext_resource type="Texture2D" uid="uid://fn7hcj6iq0jh" path="res://shaders/color_gradient_texture_1d.tres" id="2_4kmdo"]
 [ext_resource type="PackedScene" uid="uid://y352sddbvrud" path="res://components/move_component.tscn" id="2_aqa8f"]
 [ext_resource type="Script" path="res://characters/archer.gd" id="2_fe155"]

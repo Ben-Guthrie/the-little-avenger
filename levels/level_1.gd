@@ -4,9 +4,12 @@ var dialogue = load("res://globals/dialogue/intro.dialogue")
 func _ready() -> void:
 	super._ready()
 	if Game.resets == 0:
+		unhighlight_all_hauntable()
 		play_intro()
 	elif Game.resets == 1:
 		play_tutorial()
+	elif Game.resets == 2:
+		DialogueManager.show_dialogue_balloon(dialogue, "lie")
 
 func play_intro():
 	$Characters/Timmy/AnimatedSprite2D.play("idle_up")

@@ -6,7 +6,8 @@ var level_scenes = {
 	2: preload("res://levels/level_2.tscn"),
 	3: preload("res://levels/level_3.tscn"),
 	4: preload("res://levels/level_4.tscn"),
-	5: preload("res://levels/level_5.tscn")
+	5: preload("res://levels/level_6.tscn"),
+	6: preload("res://levels/level_5.tscn")
 }
 var final_scene = preload("res://levels/end_scene.tscn")
 var current_scene

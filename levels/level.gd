@@ -6,6 +6,7 @@ var units_to_move = 0
 var units_moved = 0
 var units
 @export var energy: int = 1
+var paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,14 +15,18 @@ func _ready() -> void:
 	if Game.pathfinder:
 		Game.pathfinder.initialize()
 	SignalBus.start.connect(_on_start)
+	highlight_all_hauntable()
 
 func _on_start():
 	await check_triggers()
+	unhighlight_all_hauntable()
 	move_units()
 
 func check_triggers(trigger_target = null):
 	SignalBus.pause_animation.emit()
 	for character in $Characters.get_children():
+		if paused:
+			return
 		if is_instance_valid(character) and character.has_node("TriggerComponent") and !character.get("is_dead"):
 			#print("checking trigger")
 			var trigger = character.get_node("TriggerComponent").check_for_trigger()
@@ -44,6 +49,8 @@ func move_units():
 			move_unit(unit, unit.path)
 
 func move_unit(unit: Node2D, path_markers: Node2D):
+	if paused:
+		return
 	if path_markers.get_child_count() == 0:
 		#print("no path")
 		return
@@ -74,3 +81,22 @@ func _on_object_moved(_from: Vector2, _to: Vector2):
 			units_to_move = 0
 			await check_triggers()
 			move_units()
+
+func highlight_hauntable(n: Node, should_highlight = true):
+	if n.has_node("HauntableComponent"):
+		n.get_node("HauntableComponent").set_highlight(should_highlight)
+		
+
+func highlight_all_hauntable():
+	for c in get_children():
+		call_children(highlight_hauntable.bind(true), c)
+
+func unhighlight_all_hauntable():
+	for c in get_children():
+		call_children(highlight_hauntable.bind(false), c)
+
+
+func call_children(f: Callable, n: Node):
+	f.call(n)
+	for c in n.get_children():
+		call_children(f, c)
