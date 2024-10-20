@@ -21,3 +21,5 @@ signal allow_continue
 signal no_continue
 signal open_menu
 signal return_to_menu
+signal start_dialogue
+signal end_dialogue

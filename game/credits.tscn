@@ -43,13 +43,14 @@ text = "[center][b]The Little Avenger[/b][/center]
 Made by Ben Guthrie for Godot Wild Jam 74, with the theme \"Haunted\".
 Wildcards used: Pursuer, Through the Teeth
 
-[center]Assets[/center]
 Tiny Series Assets by Kenney (Kenney.nl)
 Licensed under Creative Commons CC0
 
-[center]Music[/center]
 \"Morning\" by Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons: By Attribution 4.0 License"
+Licensed under Creative Commons: By Attribution 4.0 License
+
+Dialogue Manager by Nathan Hoad
+Licensed under MIT License"
 
 [node name="CloseButton" type="TextureButton" parent="."]
 layout_mode = 1
